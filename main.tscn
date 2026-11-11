@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://di14wgxwj18k8"]
+
+[ext_resource type="Script" uid="uid://56ko32sc1bt2" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://btw7r608j7qq7" path="res://scenes/enemy.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://3ajewkvt3yek" path="res://scenes/player_character.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dh267rqiya6qr" path="res://scenes/power_up.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bcl8gkmg52s0g" path="res://scenes/ui.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bxgio6ynl2be8" path="res://scenes/ground.tscn" id="6_7mycd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_h2yge")
+enemy_scene = ExtResource("2_1bvp3")
+power_up_scene = ExtResource("3_lquwl")
+
+[node name="Player" parent="." instance=ExtResource("2_h2yge")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="UI" parent="Player" instance=ExtResource("5_7mycd")]
+offset_left = -481.0
+offset_top = -301.0
+offset_right = -481.0
+offset_bottom = -301.0
+
+[node name="PowerUpTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpawnerTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-22, 164)
+rotation = -6.285
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(161, 652)
+scale = Vector2(85.277, 2.13219)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
+[node name="Ground" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(-547, -76.0005)
+rotation = 1.53562
+
+[node name="Ground2" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(552, -608)
+
+[node name="Ground3" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(475, 203)
+rotation = 1.5281
+
+[connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
+[connection signal="timeout" from="SpawnerTimer" to="." method="_on_spawner_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

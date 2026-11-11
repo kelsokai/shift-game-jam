@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://3ajewkvt3yek"]
+
+[ext_resource type="Script" uid="uid://b3mgtrm5jc00w" path="res://scripts/player_controller.gd" id="1_f50pn"]
+[ext_resource type="Script" uid="uid://dgb2gayod35ev" path="res://scripts/gun.gd" id="2_5up26"]
+[ext_resource type="PackedScene" uid="uid://bxr6xswftcmnf" path="res://scenes/bullet.tscn" id="3_4akcp"]
+[ext_resource type="Texture2D" uid="uid://c1frip7gw2ky4" path="res://player_idle.png" id="4_4h0vy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghijl"]
+height = 82.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4h0vy"]
+radius = 4.03134
+height = 20.1231
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj7mf"]
+atlas = ExtResource("4_4h0vy")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vmgx"]
+atlas = ExtResource("4_4h0vy")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6unfe"]
+atlas = ExtResource("4_4h0vy")
+region = Rect2(144, 144, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pxja8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj7mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vmgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6unfe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_f50pn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -20)
+shape = SubResource("CapsuleShape2D_ghijl")
+
+[node name="Gun" type="Area2D" parent="."]
+position = Vector2(36, 0)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_5up26")
+bullet_scene = ExtResource("3_4akcp")
+
+[node name="Timer" type="Timer" parent="Gun"]
+wait_time = 0.869
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Gun"]
+position = Vector2(-22, -16)
+target_position = Vector2(50, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun"]
+position = Vector2(-16, -15)
+rotation = -1.6044
+shape = SubResource("CapsuleShape2D_4h0vy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pxja8")
+
+[connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]

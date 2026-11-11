@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxr6xswftcmnf"]
+
+[ext_resource type="Script" uid="uid://bdjucru4y10qg" path="res://scripts/bullet.gd" id="1_v7oki"]
+[ext_resource type="Texture2D" uid="uid://c40uyj82lqjnh" path="res://resources/bullet.png" id="2_y25gk"]
+[ext_resource type="Texture2D" uid="uid://d3guku2dmrltl" path="res://addons/kenney_particle_pack/star_07.png" id="3_l5glv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y25gk"]
+lifetime_randomness = 0.45
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 19.05
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -720.0
+angle_max = -720.0
+inherit_velocity_ratio = 0.32
+spread = 99.287
+scale_min = 0.0
+scale_max = 0.05
+turbulence_enabled = true
+turbulence_noise_speed_random = 2.3
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["bullet"]]
+collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_v7oki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v7oki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.105, 0.105)
+texture = ExtResource("2_y25gk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 10
+texture = ExtResource("3_l5glv")
+explosiveness = 1.0
+randomness = 0.33
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_y25gk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

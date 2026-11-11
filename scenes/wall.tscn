@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcwlpheftf2b"]
+
+[ext_resource type="Script" uid="uid://x58v3p2np6pq" path="res://scripts/terrain_controller.gd" id="1_2ktk7"]
+[ext_resource type="Texture2D" uid="uid://b6a5gkgh3audg" path="res://resources/wall.png" id="2_2ktk7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqteh"]
+size = Vector2(20, 26.415)
+
+[node name="Ground" type="StaticBody2D"]
+position = Vector2(2635, 262)
+rotation = 1.56829
+scale = Vector2(85.277, 2.13219)
+script = ExtResource("1_2ktk7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mqteh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+physics_interpolation_mode = 2
+texture = ExtResource("2_2ktk7")
