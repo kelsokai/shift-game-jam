@@ -1,11 +1,12 @@
 extends Node2D
 @export var enemy_scene: PackedScene
 @export var power_up_scene:PackedScene
-var score
 func _ready() -> void:
 	GlobalVariables.new_game()
 	$SpawnerTimer.start()
 	$PowerUpTimer.start()
+	$"Game Over".hide()
+	
 	
 func _on_spawner_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate()
@@ -21,6 +22,9 @@ func _physics_process(delta: float) -> void:
 		GlobalVariables.game_over()
 		$SpawnerTimer.stop()
 		$PowerUpTimer.stop()
+		$ScoreTimer.stop()
+		$"Game Over/RichTextLabel".text = "score:" + str(GlobalVariables.score)
+		$"Game Over".show()
 
 func _on_power_up_timer_timeout() -> void:
 	var power_up = power_up_scene.instantiate()
@@ -37,10 +41,9 @@ func _on_power_up_timer_timeout() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("player")):
 		GlobalVariables.health=0
-		print(GlobalVariables.health)
 	else:
 		body.queue_free()
 
 
 func _on_score_timer_timeout() -> void:
-	pass # Replace with function body.
+	GlobalVariables.score += 10 # Replace with function body.

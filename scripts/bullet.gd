@@ -14,3 +14,4 @@ func _on_body_entered(body: Node) -> void:
 	if(body.is_in_group("enemy")):
 		body.hit(damage)
 		queue_free()# Replace with function body.
+ 

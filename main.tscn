@@ -1,22 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://di14wgxwj18k8"]
+[gd_scene load_steps=9 format=3 uid="uid://di14wgxwj18k8"]
 
 [ext_resource type="Script" uid="uid://56ko32sc1bt2" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://btw7r608j7qq7" path="res://scenes/enemy.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://3ajewkvt3yek" path="res://scenes/player_character.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dh267rqiya6qr" path="res://scenes/power_up.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cgyn71u6u7ley" path="res://scenes/game_over.tscn" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://bcl8gkmg52s0g" path="res://scenes/ui.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bxgio6ynl2be8" path="res://scenes/ground.tscn" id="6_7mycd"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+distance = 3.13809
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h2yge")
 enemy_scene = ExtResource("2_1bvp3")
 power_up_scene = ExtResource("3_lquwl")
 
+[node name="Game Over" parent="." instance=ExtResource("4_272bh")]
+
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
 
 [node name="UI" parent="Player" instance=ExtResource("5_7mycd")]
 offset_left = -481.0
@@ -25,6 +30,7 @@ offset_right = -481.0
 offset_bottom = -301.0
 
 [node name="PowerUpTimer" type="Timer" parent="."]
+wait_time = 2.277
 autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
@@ -43,6 +49,24 @@ position = Vector2(161, 652)
 scale = Vector2(85.277, 2.13219)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2761.02, 558.991)
+rotation = 1.60261
+scale = Vector2(85.277, 2.13219)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2903.95, 31.2694)
+rotation = 4.70526
+scale = Vector2(85.277, 2.13219)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-374.841, -2843.69)
+rotation = 3.13299
+scale = Vector2(85.277, 2.13219)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
 [node name="Ground" parent="." instance=ExtResource("6_7mycd")]
 position = Vector2(-547, -76.0005)
 rotation = 1.53562
@@ -55,6 +79,6 @@ position = Vector2(475, 203)
 rotation = 1.5281
 
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_power_up_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="SpawnerTimer" to="." method="_on_spawner_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
