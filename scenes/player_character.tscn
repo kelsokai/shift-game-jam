@@ -42,6 +42,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_f50pn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,7 +58,7 @@ script = ExtResource("2_5up26")
 bullet_scene = ExtResource("3_4akcp")
 
 [node name="Timer" type="Timer" parent="Gun"]
-wait_time = 0.869
+wait_time = 0.22
 autostart = true
 
 [node name="RayCast2D" type="RayCast2D" parent="Gun"]

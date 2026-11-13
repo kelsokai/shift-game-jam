@@ -4,14 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://l0gx4u6spgxt" path="res://resources/ground.png" id="2_lmksl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqteh"]
-size = Vector2(20, 26.415)
+size = Vector2(31.9664, 33.2991)
 
-[node name="Ground" type="StaticBody2D"]
+[node name="Ground" type="StaticBody2D" groups=["ground", "top"]]
 scale = Vector2(85.277, 2.13219)
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_mi8v4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.20752)
+position = Vector2(-0.0117261, 1.1725)
 shape = SubResource("RectangleShape2D_mqteh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -4,9 +4,9 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -550.0
 var can_shift = 2
-
+signal  power_up_touched
 func _ready() -> void:
 	GlobalVariables.player = self
 	
@@ -62,8 +62,8 @@ func _physics_process(delta: float) -> void:
 	
 	var collision = get_last_slide_collision()
 	if(collision and collision.get_collider().is_in_group("powerup")):
-		print("extend")
-a		Terrain.adjust_ground(5)
+		print("grow")
+		power_up_touched.emit(5)
 		collision.get_collider().queue_free()
 	
 	if is_on_floor(): can_shift = 2

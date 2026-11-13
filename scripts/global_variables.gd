@@ -8,6 +8,7 @@ func game_over():
 	pass
 	
 func new_game():
+	gravity = 0
 	health = 4
 	score = 0
 	invulnerable = false

@@ -5,6 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6us8"]
 
 [node name="PowerUp" type="RigidBody2D" groups=["powerup"]]
+collision_layer = 4
+collision_mask = 4
 contact_monitor = true
 max_contacts_reported = 1
 

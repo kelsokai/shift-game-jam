@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://di14wgxwj18k8"]
+[gd_scene load_steps=11 format=3 uid="uid://di14wgxwj18k8"]
 
 [ext_resource type="Script" uid="uid://56ko32sc1bt2" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://btw7r608j7qq7" path="res://scenes/enemy.tscn" id="2_1bvp3"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cgyn71u6u7ley" path="res://scenes/game_over.tscn" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://bcl8gkmg52s0g" path="res://scenes/ui.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bxgio6ynl2be8" path="res://scenes/ground.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bcwlpheftf2b" path="res://scenes/wall.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://dmmwwxd7jjwfr" path="res://scenes/clouds.tscn" id="9_4c57u"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
 distance = 3.13809
@@ -19,8 +21,10 @@ power_up_scene = ExtResource("3_lquwl")
 [node name="Game Over" parent="." instance=ExtResource("4_272bh")]
 
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-6, -113)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(1.00306, 1)
 ignore_rotation = false
 
 [node name="UI" parent="Player" instance=ExtResource("5_7mycd")]
@@ -30,7 +34,7 @@ offset_right = -481.0
 offset_bottom = -301.0
 
 [node name="PowerUpTimer" type="Timer" parent="."]
-wait_time = 2.277
+wait_time = 0.383
 autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
@@ -67,16 +71,21 @@ rotation = 3.13299
 scale = Vector2(85.277, 2.13219)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
-[node name="Ground" parent="." instance=ExtResource("6_7mycd")]
-position = Vector2(-547, -76.0005)
-rotation = 1.53562
+[node name="Ground4" parent="." instance=ExtResource("9_4c57u")]
+position = Vector2(0, -829)
+scale = Vector2(5.4, 1)
 
 [node name="Ground2" parent="." instance=ExtResource("6_7mycd")]
-position = Vector2(552, -608)
 
-[node name="Ground3" parent="." instance=ExtResource("6_7mycd")]
-position = Vector2(475, 203)
-rotation = 1.5281
+[node name="Ground" parent="." instance=ExtResource("8_kek77")]
+position = Vector2(-1311, -409)
+rotation = 3.14159
+scale = Vector2(0.652606, -1.84241)
+
+[node name="Ground3" parent="." instance=ExtResource("8_kek77")]
+position = Vector2(1350, -409)
+rotation = 3.14159
+scale = Vector2(0.652606, -1.84241)
 
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

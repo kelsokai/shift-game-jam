@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Terrain="*res://scenes/ground.tscn"
 GlobalVariables="*res://scripts/global_variables.gd"
 
 [editor]
@@ -30,6 +29,9 @@ version_control/autoload_on_startup=true
 enemy=""
 player=""
 powerup=""
+side=""
+top=""
+ground=""
 
 [input]
 

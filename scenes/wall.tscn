@@ -4,17 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://b6a5gkgh3audg" path="res://resources/wall.png" id="2_2ktk7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqteh"]
-size = Vector2(20, 26.415)
+size = Vector2(94, 495)
 
-[node name="Ground" type="StaticBody2D"]
-position = Vector2(2635, 262)
-rotation = 1.56829
-scale = Vector2(85.277, 2.13219)
+[node name="wall" type="StaticBody2D" groups=["ground", "side"]]
+collision_layer = 15
 script = ExtResource("1_2ktk7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -0.500015)
 shape = SubResource("RectangleShape2D_mqteh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 physics_interpolation_mode = 2
 texture = ExtResource("2_2ktk7")
+
+[node name="Parallax2D" type="Parallax2D" parent="Sprite2D"]

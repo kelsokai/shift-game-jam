@@ -4,15 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://ci6jfy3y3ng3n" path="res://resources/cloud.png" id="2_v7ppl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqteh"]
-size = Vector2(20, 26.415)
+size = Vector2(499, 95)
 
-[node name="Ground" type="StaticBody2D"]
-position = Vector2(0, -1687)
-scale = Vector2(85.277, 2.13219)
+[node name="Ground" type="StaticBody2D" groups=["ground", "top"]]
+collision_layer = 15
 script = ExtResource("1_v7ppl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.20752)
+position = Vector2(0.5, -0.500002)
 shape = SubResource("RectangleShape2D_mqteh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
